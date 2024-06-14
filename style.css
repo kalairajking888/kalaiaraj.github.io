@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f9;
     color: #333;
+    transition: background-color 0.5s, color 0.5s;
 }
 
 header {
@@ -11,6 +14,10 @@ header {
     color: #fff;
     text-align: center;
     padding: 2em 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: background 0.5s;
 }
 
 .hero {
@@ -22,15 +29,18 @@ header {
 .hero h1 {
     font-size: 3em;
     margin: 0.5em 0;
+    animation: fadeInDown 1s ease-out;
 }
 
 .hero p {
     font-size: 1.2em;
     margin: 0.5em 0;
+    animation: fadeInUp 1s ease-out;
 }
 
 nav {
     margin-top: 1em;
+    animation: fadeIn 2s ease-out;
 }
 
 nav a {
@@ -41,14 +51,17 @@ nav a {
     padding: 10px 20px;
     border-radius: 25px;
     background: rgba(255, 255, 255, 0.2);
+    transition: background 0.3s, transform 0.3s;
 }
 
 nav a:hover {
     background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
 }
 
 main {
     padding: 2em 0;
+    animation: fadeIn 1.5s ease-out;
 }
 
 .content-section {
@@ -58,6 +71,11 @@ main {
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s;
+}
+
+.content-section:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 h2 {
@@ -66,6 +84,8 @@ h2 {
     display: inline-block;
     padding-bottom: 0.5em;
     margin-bottom: 1em;
+    position: relative;
+    animation: slideInLeft 1s ease-out;
 }
 
 .skills-grid, .projects-grid {
@@ -81,6 +101,27 @@ h2 {
     border-radius: 10px;
     text-align: center;
     transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-item::before, .project-item::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(45deg);
+    transition: all 0.75s;
+}
+
+.skill-item:hover::before, .project-item:hover::before {
+    top: -30%;
+    left: -30%;
+    width: 160%;
+    height: 160%;
 }
 
 .skill-item:hover, .project-item:hover {
@@ -97,10 +138,32 @@ footer {
 a {
     color: #66c3ff;
     text-decoration: none;
+    transition: color 0.3s;
 }
 
 a:hover {
     text-decoration: underline;
+    color: #4CAF50;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
 }
 
 @media (max-width: 600px) {
@@ -109,7 +172,7 @@ a:hover {
         flex-direction: column;
         align-items: center;
     }
-    
+
     nav a {
         margin: 10px 0;
     }
